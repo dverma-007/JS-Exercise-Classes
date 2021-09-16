@@ -20,12 +20,12 @@ class Airplane {
         this.isFlying = false;
     }
 }
-
-/*
-// 👇 COMPLETE YOUR WORK BELOW 👇
-// 👇 COMPLETE YOUR WORK BELOW 👇
-// 👇 COMPLETE YOUR WORK BELOW 👇
-*/
+console.log(Airplane)
+    /*
+    // 👇 COMPLETE YOUR WORK BELOW 👇
+    // 👇 COMPLETE YOUR WORK BELOW 👇
+    // 👇 COMPLETE YOUR WORK BELOW 👇
+    */
 
 /*
   TASK 1
@@ -41,21 +41,21 @@ class Airplane {
 */
 
 class Person {
-    constructor(attr) {
-        this.name = attr.name,
-            this.age = attr.age,
-            this.stomach = attr.stomach
+    constructor(name, age) {
+        this.name = name,
+            this.age = age,
+            this.stomach = []
     }
     eat(edible) {
-        if (Person.length < 10) {
+        if (this.stomach.length < 10) {
             this.stomach.push(edible)
-        };
+        }
     }
     poop() {
-        this.stomach.splice(0, stomach.length);
+        this.stomach.splice(0, this.stomach.length);
     }
     toString() {
-        `${this.name}, ${this.age}`;
+        return `${this.name}, ${this.age}`;
     }
 }
 /*
@@ -73,24 +73,29 @@ class Person {
 */
 
 class Car {
-    constuctor(model, milesPerGallon) {
-        this.model = model,
-            this.milesPerGallon = milesPerGallon,
-            this.tank = 0,
-            this.odometer = 0
-    }
-    fill() {
-        this.tank = this.tank + this.gallons
-    }
+    constructor(model, milesPerGallon) {
+            this.model = model,
+                this.milesPerGallon = milesPerGallon,
+                this.tank = 0,
+                this.odometer = 0
+        }
+        /* gallons is the amount of gas added to the car at the pump */
+    fill(gallons) {
+            this.tank = this.tank + gallons;
+        }
+        /* distance is the distance driven by the driver*/
     drive(distance) {
-        this.odometer = this.odometer + distance,
-            this.tank = this.distance / this.milesPerGallon,
-            if (this.tank = 0) {
-                `I ran out of fuel at ${this.odometer} miles!`
-            }
+        this.odometer = this.odometer + distance;
+        /* milesToEmpty = amount of gas in tank * miles per gallon */
+        this.tank = this.tank - distance / this.milesPerGallon;
+        this.milesToEmpty = this.tank * this.milesPerGallon;
+        /* if the distance driven is larger than the miles before the car goes empty, the car will run out of gas at a certain mile */
+        if (distance > this.milesToEmpty) {
+            this.odometer = this.odometer + this.milesToEmpty;
+            return `I ran out of fuel at ${this.odometer} miles!`
+        }
     }
 }
-
 
 /*
   TASK 3
@@ -111,7 +116,7 @@ class Lambdasian {
             this.location = argument.location
     }
     speak() {
-        return `Hello my name is ${argument.name}, I am from ${argument.location}`
+        return `Hello my name is ${this.name}, I am from ${this.location}`
     }
 }
 
@@ -132,9 +137,9 @@ class Lambdasian {
 class Instructor extends Lambdasian {
     constructor(instructAttrs) {
         super(instructAttrs);
-        this.specialty = instructAttrs.specialty;
-        this.favLanguage = instructAttrs.favLanguage;
-        this.catchPhrase = instructAttrs.catchPhrase;
+        this.specialty = instructAttrs.specialty,
+            this.favLanguage = instructAttrs.favLanguage,
+            this.catchPhrase = instructAttrs.catchPhrase
     }
     demo(subject) {
         return `Today we are learning about ${subject}`
@@ -156,20 +161,22 @@ class Instructor extends Lambdasian {
     - Student instances have the following methods:
         + `listSubjects` a method that returns all of the student's favSubjects in a single string: `Loving HTML, CSS, JS!`.
         + `PRAssignment` a method that receives a subject as an argument and returns `student.name has submitted a PR for {subject}`
-        + `sprintChallenge` similar to PRAssignment but returns `student.name has begun sprint challenge on {subject}`
-*/
+        + `sprintChallenge` similar to PRAssignment but returns `student.name has begun sprint challenge on {subject}`*/
 class Student extends Lambdasian {
     constructor(studentArg) {
         super(studentArg),
             this.previousBackground = studentArg.previousBackground,
-            this.classname = studentArg.classname,
+            this.className = studentArg.className,
             this.favSubjects = studentArg.favSubjects
     }
     listSubjects() {
         return `Loving ${this.favSubjects.toString()}!`;
     }
     PRAssignment(subject) {
-        return `{student.name} has submitted a PR for ${subject}`
+        return `${this.name} has submitted a PR for ${subject}`
+    }
+    sprintChallenge(subject) {
+        return `${this.name} has begun sprint challenge on ${subject}`
     }
 }
 
@@ -188,14 +195,15 @@ class Student extends Lambdasian {
 */
 class ProjectManager extends Instructor {
     constructor(arg2) {
+        super(arg2)
         this.gradClassName = arg2.gradClassName,
             this.favInstructor = arg2.favInstructor
     }
     standUp(channel) {
-        return `${arg2.favInstructor} announces to ${channel}, @channel standy times!`
+        return `${this.name} announces to ${channel}, @channel standy times!`
     }
     debugsCode(student, subject) {
-        returns `{arg2.favInstructor} debugs {student.name}'s code on {subject}`
+        return `${this.name} debugs ${student.name}'s code on ${subject}`
     }
 }
 /*
