@@ -92,6 +92,7 @@ class Car {
         /* if the distance driven is larger than the miles before the car goes empty, the car will run out of gas at a certain mile */
         if (distance > this.milesToEmpty) {
             this.odometer = this.odometer + this.milesToEmpty;
+            this.tank = 0;
             return `I ran out of fuel at ${this.odometer} miles!`
         }
     }
